@@ -4,14 +4,17 @@ import FormNative from '@/components/Forms/FormNative/FormNative.vue'
 import BaseSelect from '@/components/Forms/FormNative/inputs/SelectNative.vue'
 import { Option } from '@/components/Forms/FormNative/inputs/Option'
 
-const firstSelectOptions: Option<string>[] = [
-  { title: 'First', id: 1, value: 'first' },
-  { title: 'Second', id: 2, value: 'Fourth' },
-  { title: 'Third', id: 3, value: 'third', isDisabled: true },
-  { title: 'Fourth', id: 4, value: 'fourth' },
+const firstSelectOptions: Option[] = [
+  { title: 'First', uniqueKey: 1, value: 'first' },
+  { title: 'Second', uniqueKey: 2, value: 'second' },
+  { title: 'Third', uniqueKey: 3, value: 'third' },
+  { title: 'Fourth', uniqueKey: 4, value: 'fourth' },
+  { title: 'Fifth', uniqueKey: 5, value: 'fifth', isDisabled: true },
 ]
 
 const selectId = 'test'
+const EMPTY_OPTION_FIRST: Option =
+  { uniqueKey: -1, isDisabled: true, title: 'not selected', value: '' }
 
 function onSubmit(e: Event) {
   e.preventDefault()
@@ -30,11 +33,13 @@ function onSubmit(e: Event) {
         :name="selectId"
         required
         allow-empty
-        multiple
         :options="firstSelectOptions"
-        :current="firstSelectOptions[0]"
+        :initialOptionKey="firstSelectOptions[1].uniqueKey"
+        :empty-option="EMPTY_OPTION_FIRST"
       />
-      <button type="submit">Submit</button>
+      <div class="d-block mt-3">
+        <button type="submit">Submit</button>
+      </div>
     </form-native>
   </div>
 </template>

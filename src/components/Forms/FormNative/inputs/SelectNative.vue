@@ -1,30 +1,20 @@
 <script lang="ts" setup>
 import { computed, PropType } from 'vue'
-import { Option } from './Option'
+import { Option, UniqueKey } from './Option'
 
 const props = defineProps({
-  options: Array as PropType<Option<any>[]>,
-  current: {
-    type: Object as PropType<Option<any>>
+  options: Array as PropType<Option[]>,
+  initialOptionKey: {
+    type: Object as PropType<UniqueKey>
   },
-  allowEmpty: {
-    type: Boolean,
-    default: false
-  },
-  emptyTitle: {
-    type: String,
-    default: ''
+  emptyOption: {
+    type:  Object as PropType<Option>
   }
 })
 
-const DEFAULT_OPTION: Option<null> = { title: props.emptyTitle, value: null, id: -1, isDisabled: !props.allowEmpty }
-
 const computedOptions = computed(() => {
-  return [DEFAULT_OPTION, ...props.options]
-})
-
-const computedCurrent = computed(() => {
-  return props.current ? props.current : DEFAULT_OPTION
+  // keep same attitude - return new array in any case
+  return props.emptyOption ? [props.emptyOption, ...props.options] : [...props.options]
 })
 </script>
 
@@ -33,8 +23,8 @@ const computedCurrent = computed(() => {
     <option
       v-for="option in computedOptions"
       :value="option.value"
-      :key="option.id"
-      :selected="option.id === computedCurrent.id"
+      :key="option.uniqueKey"
+      :selected="option.uniqueKey === initialOptionKey"
       :disabled="option.isDisabled"
     >
       {{ option.title }}
