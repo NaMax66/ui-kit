@@ -21,5 +21,10 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest'
+  },
+  rules: {
+    quotes: ['warn', 'single'],
+    semi: ['warn', 'never'],
+    'object-curly-spacing': ['warn', 'always']
   }
 }

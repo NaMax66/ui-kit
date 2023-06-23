@@ -21,7 +21,6 @@
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 }
 
-/* semantic color variables for this project */
 :root {
   --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
@@ -34,6 +33,13 @@
   --color-text: var(--vt-c-text-light-1);
 
   --section-gap: 160px;
+
+  --default-b-radius: 2px;
+
+  --ffamily-main: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+  Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
+  --fs-main: 1.6rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -58,16 +64,46 @@
   font-weight: normal;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
   min-height: 100vh;
   color: var(--color-text);
   background: var(--color-background);
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  font-size: 15px;
+  font-family: var(--ffamily-main);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.heading-1 {
+  font-size: 3rem;
+}
+
+.heading-2 {
+  font-size: 2.5rem;
+}
+
+.heading-3 {
+  font-size: 2rem;
+}
+
+.heading-4 {
+  font-size: 1.5rem;
+}
+
+.mt-3 {
+  margin-top: 3rem;
+}
+
+.mb-3 {
+  margin-bottom: 3rem;
+}
+
+.d-block {
+  display: block;
 }
