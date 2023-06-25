@@ -3,12 +3,23 @@ import { computed, PropType } from 'vue'
 import { Option, UniqueKey } from './Option'
 
 const props = defineProps({
-  options: Array as PropType<Option[]>,
+  options: {
+    type: Array as PropType<Option[]>,
+    validator(value: unknown): boolean {
+      return value?.every(el => typeof el?.value === 'string' && el?.value !== '')
+    }
+  },
   initialOptionKey: {
-    type: Object as PropType<UniqueKey>
+    type: Number as PropType<UniqueKey>
   },
   emptyOption: {
-    type:  Object as PropType<Option>
+    type:  Object as PropType<Option>,
+    validator(value: unknown): boolean {
+      if(value?.value !== '') {
+        throw new Error(`emptyOption.value is '${value?.value}' but must be an empty string!`)
+      }
+      return true
+    }
   }
 })
 

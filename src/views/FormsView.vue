@@ -13,8 +13,8 @@ const firstSelectOptions: Option[] = [
 ]
 
 const selectId = 'test'
-const EMPTY_OPTION_FIRST: Option =
-  { uniqueKey: -1, isDisabled: true, title: 'not selected', value: '' }
+const EMPTY_OPTION_FIRST =
+  { uniqueKey: -1, isDisabled: false, title: 'not selected', value: '' }
 
 function onSubmit(e: Event) {
   e.preventDefault()
@@ -32,9 +32,8 @@ function onSubmit(e: Event) {
       <base-select
         :name="selectId"
         required
-        allow-empty
         :options="firstSelectOptions"
-        :initialOptionKey="firstSelectOptions[1].uniqueKey"
+        :initialOptionKey="EMPTY_OPTION_FIRST.uniqueKey"
         :empty-option="EMPTY_OPTION_FIRST"
       />
       <div class="d-block mt-3">
