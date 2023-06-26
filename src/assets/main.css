@@ -1,4 +1,5 @@
 @import './base.css';
+@import 'normalize.css';
 
 #app {
   max-width: 1280px;
@@ -8,4 +9,8 @@
 
 a {
   font-size: 2rem;
+}
+
+p {
+  font-size: 1.6rem;
 }
