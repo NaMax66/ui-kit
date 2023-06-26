@@ -30,7 +30,7 @@ const computedOptions = computed(() => {
 </script>
 
 <template>
-  <select class="base-select">
+  <select class="select-native">
     <option
       v-for="option in computedOptions"
       :value="option.value"
@@ -44,7 +44,7 @@ const computedOptions = computed(() => {
 </template>
 
 <style scoped>
-.base-select {
+.select-native {
   border: none;
   background: var(--color-background);
   padding: 8px 12px;
@@ -54,7 +54,7 @@ const computedOptions = computed(() => {
   transition: outline-width .1s;
 }
 
-.base-select:focus-visible {
+.select-native:focus-visible {
   outline: 2px solid var(--color-border-hover);
   outline-offset: 1px;
 }

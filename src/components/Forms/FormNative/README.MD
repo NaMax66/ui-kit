@@ -6,3 +6,4 @@
 3. If value set undefined FormData get title from it
 
 Despite all the difficulties, <select> is useful for native devices that, seeing this, switch to their own selection mechanism
+And excellent keyboard support 
