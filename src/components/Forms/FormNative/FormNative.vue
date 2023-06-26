@@ -34,6 +34,6 @@ function onSubmit(e: Event) {
 .form-native {
   border: 1px solid var(--color-border);
   border-radius: var(--default-b-radius);
-  padding: 1rem;
+  padding: 2rem;
 }
 </style>

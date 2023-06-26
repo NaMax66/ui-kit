@@ -30,41 +30,40 @@ const names = {
 </script>
 
 <template>
-  <div class="mt-3">
-    <form-native @submitForm="onSubmit">
-      <h3 class="heading-3">Native form</h3>
-      <p class="mb-3">Get all data from <strong>FormData object</strong></p>
-      <base-label class="d-block mb-1" :for="names.selectSingle">{{ names.selectSingle }}</base-label>
-      <select-native
-        :id="names.selectSingle"
-        :name="names.selectSingle"
-        :options="firstSelectOptions"
-        :initialOptionKey="EMPTY_OPTION_FIRST.uniqueKey"
-        :empty-option="EMPTY_OPTION_FIRST"
-      />
+  <form-native class="d-inline-block mt-3" @submitForm="onSubmit">
+    <h3 class="heading-3">Native form</h3>
+    <p class="mb-3">Get all data from <strong>FormData object</strong></p>
+    <base-label class="d-block mb-1" :for="names.selectSingle">{{ names.selectSingle }}</base-label>
+    <select-native
+      :id="names.selectSingle"
+      :name="names.selectSingle"
+      :options="firstSelectOptions"
+      :initialOptionKey="EMPTY_OPTION_FIRST.uniqueKey"
+      :empty-option="EMPTY_OPTION_FIRST"
+    />
 
-      <base-label class="d-block mb-1 mt-3" :for="names.selectMultiple">{{ names.selectMultiple }}</base-label>
-      <select-native
-        :id="names.selectMultiple"
-        :name="names.selectMultiple"
-        :options="firstSelectOptions"
-        :initialOptionKey="EMPTY_OPTION_FIRST.uniqueKey"
-        :empty-option="EMPTY_OPTION_FIRST"
-        multiple
-      />
+    <base-label class="d-block mb-1 mt-3" :for="names.selectMultiple">{{ names.selectMultiple }}</base-label>
+    <select-native
+      :id="names.selectMultiple"
+      :name="names.selectMultiple"
+      :options="firstSelectOptions"
+      :initialOptionKey="EMPTY_OPTION_FIRST.uniqueKey"
+      :empty-option="EMPTY_OPTION_FIRST"
+      multiple
+    />
 
-      <base-label class="d-block mb-1 mt-3" :for="names.inputString">{{ names.inputString }}</base-label>
-      <input-native :id="names.inputString" :name="names.inputString" value="1" />
+    <base-label class="d-block mb-1 mt-3" :for="names.inputString">{{ names.inputString }}</base-label>
+    <input-native :id="names.inputString" :name="names.inputString" value="1" />
 
-      <base-label class="d-block mb-1 mt-3" :for="names.inputNumber">{{ names.inputNumber }}</base-label>
-      <!-- in FormData number converts to string -->
-      <input-native step=".01" type="number" :id="names.inputNumber" :name="names.inputNumber" :value="2" />
+    <base-label class="d-block mb-1 mt-3" :for="names.inputNumber">{{ names.inputNumber }}</base-label>
+    <!-- in FormData number converts to string -->
+    <input-native step=".01" type="number" :id="names.inputNumber" :name="names.inputNumber" :value="2" />
 
-      <label class="d-block mt-3">
-        <button type="submit">Submit</button>
-      </label>
-    </form-native>
-  </div>
+    <div class="d-flex g-1 align-center mt-3">
+      <button class="fs-2 p-1" type="submit">Submit</button>
+      <p>Open the console to see the result</p>
+    </div>
+  </form-native>
 </template>
 
 <style scoped>

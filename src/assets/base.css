@@ -110,3 +110,27 @@ body {
 .d-block {
   display: block;
 }
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.g-1 {
+  gap: 1rem;
+}
+
+.fs-2 {
+  font-size: 2rem;
+}
+
+.p-1 {
+  padding: 1rem;
+}
+
+.align-center {
+  align-items: center;
+}
