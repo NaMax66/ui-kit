@@ -25,7 +25,8 @@ const names = {
   selectSingle: 'select_single',
   selectMultiple: 'select_multiple',
   inputString: 'input_string',
-  inputNumber: 'input_number'
+  inputNumber: 'input_number',
+  inputFile: 'input_file'
 }
 </script>
 
@@ -58,6 +59,9 @@ const names = {
     <base-label class="d-block mb-1 mt-3" :for="names.inputNumber">{{ names.inputNumber }}</base-label>
     <!-- in FormData number converts to string -->
     <input-native step=".01" type="number" :id="names.inputNumber" :name="names.inputNumber" :value="2" />
+
+    <base-label class="d-block mb-1 mt-3" :for="names.inputFile">{{ names.inputFile }}</base-label>
+    <input-native multiple type="file" :id="names.inputFile" :name="names.inputFile" />
 
     <div class="d-flex g-1 align-center mt-3">
       <button class="fs-2 p-1" type="submit">Submit</button>
