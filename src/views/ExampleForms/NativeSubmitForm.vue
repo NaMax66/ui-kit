@@ -32,6 +32,7 @@ const names = {
 <template>
   <form-native class="d-flex flex-column align-start" @submitForm="onSubmit">
     <h3 class="heading-3">Native form</h3>
+    <small>This form is great if you prefer to use the native validation</small>
     <p class="mb-3">Get all data from <strong>FormData object</strong></p>
     <base-label class="d-block mb-1" :for="names.selectSingle">{{ names.selectSingle }}</base-label>
     <select-native
@@ -40,6 +41,7 @@ const names = {
       :options="firstSelectOptions"
       :initialOptionKey="EMPTY_OPTION_FIRST.uniqueKey"
       :empty-option="EMPTY_OPTION_FIRST"
+      required
     />
 
     <base-label class="d-block mb-1 mt-3" :for="names.selectMultiple">{{ names.selectMultiple }}</base-label>
@@ -53,7 +55,8 @@ const names = {
     />
 
     <base-label class="d-block mb-1 mt-3" :for="names.inputString">{{ names.inputString }}</base-label>
-    <input-native :id="names.inputString" :name="names.inputString" value="1" />
+    <!-- todo add pattern explanation map with regex object -->
+    <input-native required :pattern="/[A-Za-z]+/.source" :id="names.inputString" :name="names.inputString" value="1" />
 
     <base-label class="d-block mb-1 mt-3" :for="names.inputNumber">{{ names.inputNumber }}</base-label>
     <!-- in FormData number converts to string -->

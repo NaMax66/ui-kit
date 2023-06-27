@@ -37,6 +37,7 @@ function onSubmit() {
 <template>
   <form-native class="d-flex flex-column align-start" @submitForm="onSubmit">
     <h3 class="heading-3">VModel form</h3>
+    <small>Great for the easy to understand dataflow but need to use a custom validation</small>
     <p class="mb-3">Data flows from inputs</p>
     <select-native v-model="selected" :options="options" />
 
