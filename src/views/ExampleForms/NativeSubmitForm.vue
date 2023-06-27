@@ -30,7 +30,7 @@ const names = {
 </script>
 
 <template>
-  <form-native class="d-inline-block mt-3" @submitForm="onSubmit">
+  <form-native class="d-flex flex-column align-start" @submitForm="onSubmit">
     <h3 class="heading-3">Native form</h3>
     <p class="mb-3">Get all data from <strong>FormData object</strong></p>
     <base-label class="d-block mb-1" :for="names.selectSingle">{{ names.selectSingle }}</base-label>
@@ -63,12 +63,8 @@ const names = {
     <input-native multiple type="file" :id="names.inputFile" :name="names.inputFile" />
 
     <div class="d-flex g-1 align-center mt-3">
-      <button class="fs-2 p-1" type="submit">Submit</button>
+      <button class="fs-2 p-1 mt-auto" type="submit">Submit</button>
       <p>Open the console to see the result</p>
     </div>
   </form-native>
 </template>
-
-<style scoped>
-
-</style>

@@ -7,7 +7,8 @@ const props = defineProps({
     type: Array as PropType<Option[]>,
     validator(value: unknown): boolean {
       return value?.every(el => typeof el?.value === 'string' && el?.value !== '')
-    }
+    },
+    default: () => ([])
   },
   initialOptionKey: {
     type: Number as PropType<UniqueKey>
@@ -19,23 +20,40 @@ const props = defineProps({
         throw new Error(`emptyOption.value is '${value?.value}' but must be an empty string!`)
       }
       return true
-    }
+    },
+    default: () => ({ uniqueKey: -1, isDisabled: false, title: '', value: '' })
+  },
+
+  modelValue: {
+    type: Object as PropType<Option>
   }
 })
 
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: Option): void
+}>()
+
 const computedOptions = computed(() => {
-  // keep same attitude - return new array in any case
-  return props.emptyOption ? [props.emptyOption, ...props.options] : [...props.options]
+  return [props.emptyOption, ...props.options]
 })
+const initialSelection = computed<Option>(() => {
+  return computedOptions.value.find(el => el.uniqueKey === props.modelValue?.uniqueKey) ||
+  computedOptions.value.find(el => el.uniqueKey === props.initialOptionKey) || props.emptyOption
+})
+
+function onChange(e: Event) {
+  const val = (e.target as HTMLSelectElement).value
+  emit('update:modelValue', computedOptions.value.find(el => el.value === val))
+}
 </script>
 
 <template>
-  <select class="select-native">
+  <select class="select-native" @change="onChange">
     <option
       v-for="option in computedOptions"
       :value="option.value"
       :key="option.uniqueKey"
-      :selected="option.uniqueKey === initialOptionKey"
+      :selected="option.uniqueKey === initialSelection.uniqueKey"
       :disabled="option.isDisabled"
     >
       {{ option.title }}

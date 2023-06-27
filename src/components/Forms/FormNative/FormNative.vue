@@ -2,7 +2,7 @@
 import type { TFormData } from '@/components/Forms/FormNative/TFormData'
 
 const emit = defineEmits<{
-  submitForm: [data: TFormData]
+  (e: 'submitForm', value: TFormData): void
 }>()
 
 function onSubmit(e: Event) {
