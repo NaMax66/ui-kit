@@ -32,7 +32,6 @@ const names = {
 <template>
   <form-native class="d-flex flex-column align-start" @submitForm="onSubmit">
     <h3 class="heading-3">Native form</h3>
-    <small>This form is great if you prefer to use the native validation</small>
     <p class="mb-3">Get all data from <strong>FormData object</strong></p>
     <base-label class="d-block mb-1" :for="names.selectSingle">{{ names.selectSingle }}</base-label>
     <select-native
@@ -62,8 +61,9 @@ const names = {
     <!-- in FormData number converts to string -->
     <input-native step=".01" type="number" :id="names.inputNumber" :name="names.inputNumber" :value="2" />
 
-    <base-label class="d-block mb-1 mt-3" :for="names.inputFile">{{ names.inputFile }}</base-label>
-    <input-native multiple type="file" :id="names.inputFile" :name="names.inputFile" />
+    <!-- todo make separate element for a file input -->
+    <!-- <base-label class="d-block mb-1 mt-3" :for="names.inputFile">{{ names.inputFile }}</base-label>
+    <input-native multiple type="file" :id="names.inputFile" :name="names.inputFile" /> -->
 
     <div class="d-flex g-1 align-center mt-3">
       <button class="fs-2 p-1 mt-auto" type="submit">Submit</button>

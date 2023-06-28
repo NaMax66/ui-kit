@@ -1,9 +1,36 @@
 <script setup lang="ts">
+import { PropType } from 'vue'
+import { InputType } from './InputType'
 
+const props = defineProps({
+  modelValue: [String, Number],
+  type: {
+    type: String as PropType<InputType>,
+    default: InputType.TEXT,
+    validator(value: unknown): boolean {
+      if(typeof value !== 'string') return false
+
+      return Object.values(InputType).includes(value)
+    }
+  }
+})
+
+const emit = defineEmits<{
+  (e:'update:modelValue', value: string | number): void
+}>()
+
+function onInput(e: Event) {
+  const value = (e.target as HTMLInputElement).value
+  if ([InputType.NUMBER, InputType.RANGE].includes(props.type)) {
+    emit('update:modelValue', Number(value))
+  } else {
+    emit('update:modelValue', value)
+  }
+}
 </script>
 
 <template>
-  <input class="input-native">
+  <input :type="type" @input="onInput" :value="modelValue" class="input-native">
 </template>
 
 <style scoped>
