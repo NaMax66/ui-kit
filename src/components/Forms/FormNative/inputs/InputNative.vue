@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropType } from 'vue'
+import type { PropType } from 'vue'
 import { InputType } from './InputType'
 
 const props = defineProps({
@@ -7,9 +7,7 @@ const props = defineProps({
   type: {
     type: String as PropType<InputType>,
     default: InputType.TEXT,
-    validator(value: unknown): boolean {
-      if(typeof value !== 'string') return false
-
+    validator(value: InputType): boolean {
       return Object.values(InputType).includes(value)
     }
   }
@@ -21,7 +19,7 @@ const emit = defineEmits<{
 
 function onInput(e: Event) {
   const value = (e.target as HTMLInputElement).value
-  if ([InputType.NUMBER, InputType.RANGE].includes(props.type)) {
+  if ([InputType.NUMBER].includes(props.type)) {
     emit('update:modelValue', Number(value))
   } else {
     emit('update:modelValue', value)
