@@ -1,4 +1,4 @@
-export enum InputType {
+export enum InputNativeType {
   NUMBER = 'number',
   TEXT = 'text',
   SEARCH = 'search',

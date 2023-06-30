@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import { ref, toValue } from 'vue'
 import FormNative from '@/components/Forms/FormNative/FormNative.vue'
-import SelectNative from '@/components/Forms/FormNative/inputs/SelectNative.vue'
-import InputNative from '@/components/Forms/FormNative/inputs/InputNative.vue'
-import type { Option } from '@/components/Forms/FormNative/inputs/Option'
-import { InputType } from '@/components/Forms/FormNative/inputs/InputType'
+import SelectNative from '@/components/Forms/Inputs/SelectNative.vue'
+import InputNative from '@/components/Forms/Inputs/InputNative.vue'
+import type { Option } from '@/components/Forms/Inputs/Option'
+import { InputNativeType } from '@/components/Forms/Inputs/InputNativeType'
+import RadioSelect from "@/components/Forms/Inputs/RadioSelect.vue";
 
 const seasons: Option[] = [
     {
@@ -33,40 +34,48 @@ const season = ref(seasons[1])
 
 const inputs = ref([
   {
-    type: InputType.SEARCH,
+    type: InputNativeType.SEARCH,
     isRequired: false,
     placeholder: 'Search',
     value: ''
   },
   {
-    type: InputType.EMAIL,
+    type: InputNativeType.EMAIL,
     isRequired: false,
     placeholder: 'fox@forest.net',
     value: ''
   },
   {
-    type: InputType.TIME,
+    type: InputNativeType.TIME,
     isRequired: false,
     value: ''
   },
   {
-    type: InputType.MONTH,
+    type: InputNativeType.MONTH,
     isRequired: false,
     value: ''
   },
   {
-    type: InputType.DATE_TIME,
+    type: InputNativeType.DATE_TIME,
     isRequired: false,
     value: ''
   },
   {
-    type: InputType.URL,
+    type: InputNativeType.URL,
     isRequired: false,
     pattern: 'https://.*|http://.*',
     placeholder: 'https://example.com',
     value: ''
   },
 ])
+
+const radioGroup: Option[] = [
+  { title: 'Bread', uniqueKey: 1, value: 'bread' },
+  { title: 'Cheese', uniqueKey: 2, value: 'cheese' },
+  { title: 'Butter', uniqueKey: 3, value: 'butter', isDisabled: true },
+  { title: 'Lemon', uniqueKey: 4, value: 'lemon' }
+]
+const radioGroupSelected = ref<Option>()
 
 function onSubmit() {
   console.log(toValue(season))
@@ -76,6 +85,8 @@ function onSubmit() {
       console.log(input.value)
     }
   }
+
+  console.log(toValue(radioGroupSelected))
 }
 </script>
 
@@ -96,6 +107,8 @@ function onSubmit() {
       :placeholder="input.placeholder"
       class="mb-1"
     />
+
+    <radio-select class="mb-1" :options="radioGroup" v-model="radioGroupSelected" />
 
     <div class="d-flex g-1 align-center mt-auto pt-2">
       <button class="fs-2 p-1" type="submit">Submit</button>

@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import FormNative from '@/components/Forms/FormNative/FormNative.vue'
-import SelectNative from '@/components/Forms/FormNative/inputs/SelectNative.vue'
-import { Option } from '@/components/Forms/FormNative/inputs/Option'
-import InputNative from '@/components/Forms/FormNative/inputs/InputNative.vue'
+import SelectNative from '@/components/Forms/Inputs/SelectNative.vue'
+import type { Option } from '@/components/Forms/Inputs/Option'
+import InputNative from '@/components/Forms/Inputs/InputNative.vue'
 import BaseLabel from '@/components/Forms/_shared/BaseLabel.vue'
+import RadioGroup from '@/components/Forms/Inputs/RadioSelect.vue'
+import RadioSelect from "@/components/Forms/Inputs/RadioSelect.vue";
 
 const firstSelectOptions: Option[] = [
   { title: 'First', uniqueKey: 1, value: 'first' },
@@ -12,11 +14,17 @@ const firstSelectOptions: Option[] = [
   { title: 'Fourth', uniqueKey: 4, value: 'fourth' },
   { title: 'Fifth', uniqueKey: 5, value: 'fifth', isDisabled: true },
 ]
-
 const EMPTY_OPTION_FIRST =
   { uniqueKey: -1, isDisabled: true, title: 'not selected', value: '' }
 
-function onSubmit(data) {
+const radioGroup: Option[] = [
+  { title: 'Cat', uniqueKey: 1, value: 'cat' },
+  { title: 'Fox', uniqueKey: 2, value: 'fox' },
+  { title: 'Dog', uniqueKey: 3, value: 'dog' },
+  { title: 'Caterpillar', uniqueKey: 4, value: 'ctrpllr' }
+]
+
+function onSubmit(data: object) {
   console.log(data)
 }
 
@@ -55,11 +63,14 @@ const names = {
 
     <base-label class="d-block mb-1 mt-3" :for="names.inputString">{{ names.inputString }}</base-label>
     <!-- todo add pattern explanation map with regex object -->
-    <input-native required :pattern="/[A-Za-z]+/.source" :id="names.inputString" :name="names.inputString" value="1" />
+    <input-native required :pattern="/[A-Za-z]+/.source" :id="names.inputString" :name="names.inputString" value="Test" />
 
     <base-label class="d-block mb-1 mt-3" :for="names.inputNumber">{{ names.inputNumber }}</base-label>
     <!-- in FormData number converts to string -->
     <input-native step=".01" type="number" :id="names.inputNumber" :name="names.inputNumber" :value="2" />
+
+    <base-label class="d-block mb-1 mt-3" for="radio-zoo">Zoo</base-label>
+    <radio-select required name="radio-zoo" :options="radioGroup" />
 
     <!-- todo make separate element for a file input -->
     <!-- <base-label class="d-block mb-1 mt-3" :for="names.inputFile">{{ names.inputFile }}</base-label>
