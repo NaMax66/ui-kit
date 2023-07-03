@@ -1,7 +1,9 @@
 <!-- no need to have a single radio input -->
+<!-- also can be wrapped with fieldset -->
 <script setup lang="ts">
-  import { PropType, ref } from 'vue'
-  import type { Option, UniqueKey } from "@/components/Forms/Inputs/Option";
+  import { ref } from 'vue'
+  import type { PropType } from 'vue'
+  import type { Option, UniqueKey } from '@/components/Forms/Inputs/Option'
 
   const props = defineProps({
     options: {
@@ -14,7 +16,7 @@
   })
 
   const emit = defineEmits<
-  (e: 'update:modelValue', value: Option) => void
+  (e: 'update:modelValue', value: Option | undefined) => void
   >()
 
   const localSelected = ref(props.modelValue)

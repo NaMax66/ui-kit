@@ -5,7 +5,14 @@ import SelectNative from '@/components/Forms/Inputs/SelectNative.vue'
 import InputNative from '@/components/Forms/Inputs/InputNative.vue'
 import type { Option } from '@/components/Forms/Inputs/Option'
 import { InputNativeType } from '@/components/Forms/Inputs/InputNativeType'
-import RadioSelect from "@/components/Forms/Inputs/RadioSelect.vue";
+import RadioSelect from '@/components/Forms/Inputs/RadioSelect.vue'
+
+type InputPattern = { pattern: string, title: string }
+
+const patterns: { [key: string]: InputPattern } = {
+  name: { pattern: '[^0-9]\\w+', 'title': 'A string of two or more letters without spaces. The first letter should NOT be a number. "_" is acceptable' },
+  text: { pattern: '\\w+', title: 'String with or without numbers and without spaces. "_" is acceptable' }
+}
 
 const seasons: Option[] = [
     {
@@ -35,9 +42,19 @@ const season = ref(seasons[1])
 const inputs = ref([
   {
     type: InputNativeType.SEARCH,
-    isRequired: false,
+    isRequired: true,
     placeholder: 'Search',
+    pattern: patterns.text.pattern,
+    title: patterns.text.title,
     value: ''
+  },
+  {
+    type: InputNativeType.TEXT,
+    isRequired: false,
+    pattern: patterns.name.pattern,
+    placeholder: 'Enter your name',
+    value: '',
+    title: patterns.name.title
   },
   {
     type: InputNativeType.EMAIL,
@@ -78,15 +95,15 @@ const radioGroup: Option[] = [
 const radioGroupSelected = ref<Option>()
 
 function onSubmit() {
-  console.log(toValue(season))
+  console.log('select native', toValue(season))
 
-  for(let input of inputs.value) {
-    if(input.value) {
-      console.log(input.value)
+  for(let { type, value } of inputs.value) {
+    if(value) {
+      console.log({ type, value })
     }
   }
 
-  console.log(toValue(radioGroupSelected))
+  if(radioGroupSelected.value) console.log('radio group', toValue(radioGroupSelected))
 }
 </script>
 
@@ -96,9 +113,15 @@ function onSubmit() {
     <small>Great for the easy to understand dataflow. Native validation still works</small>
     <p class="mb-3">Data flows from inputs</p>
     <select-native class="mb-1" required v-model="season" :options="seasons" />
-    <!--  todo inputs for: radio(radio-group), file, range, tel with mask support  -->
+    <!--  todo inputs for: file, range, tel with mask support  -->
     <input-native
+      @invalid="(e: Event) => {
+        // can be customized by using e.target.validity
+        // target.setCustomValidity('Some custom error msg') and then should be cleaned by setCustomValidity('') in input event
+        // but when error appears the msg will be taken from title attr
+      }"
       v-for="(input, index) in inputs"
+      :title="input.title"
       v-model="input.value"
       :key="index"
       :required="input.isRequired"

@@ -62,8 +62,7 @@ const names = {
     />
 
     <base-label class="d-block mb-1 mt-3" :for="names.inputString">{{ names.inputString }}</base-label>
-    <!-- todo add pattern explanation map with regex object -->
-    <input-native required :pattern="/[A-Za-z]+/.source" :id="names.inputString" :name="names.inputString" value="Test" />
+    <input-native required :id="names.inputString" :name="names.inputString" value="Test" />
 
     <base-label class="d-block mb-1 mt-3" :for="names.inputNumber">{{ names.inputNumber }}</base-label>
     <!-- in FormData number converts to string -->
